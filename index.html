@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>A simple blackjack game in JavaScript</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+<body>
+
+    <div id="table">
+      <div id="dealer-score" class="score">Dealer score: <span>0</span></div>
+      <div id="deck">
+        <div class="back"></div>
+      </div>
+      <div class="container" id="dealer images">
+      </div>
+
+      <div class="border-line"></div>
+
+      <div id="player-score" class="score">Your score: <span>0</span></div>
+      <div class="container" id="player images">
+      </div>
+    </div>
+
+    <div id="panel">
+      <div id="status"></div>
+      <button id="deal"  type="button">Start</button>
+      <button id="hit"  type="button" disabled>カードを引く</button>
+      <button id="stand"  type="button" disabled>ディーラーがカードを引く</button>
+
+    </div>
+
+    <script type="text/javascript" src="blackjack.js"></script>
+    <script type="text/javascript">
+      //initialise the game
+      BlackjackJS.init();
+    </script>
+  </body>
+</html>
