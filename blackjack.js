@@ -5,7 +5,7 @@ var BlackjackJS = (function() {
 
 	function Card(card, score){
 		this.card = card;
-	  this.score = score;
+	    this.score = score;
 	}
 
 
@@ -18,7 +18,8 @@ var BlackjackJS = (function() {
   //           alert(image.src);
 		// 	imageParent.appendChild(image);
 		return `
-			<img class="suit">` + "src = "png/" +" this.card " " + `</>
+			<div class="card ` + this.suit + `">
+			</div>
 		`;
 	}
 
@@ -57,7 +58,7 @@ var BlackjackJS = (function() {
 	    this.deck;
 
 		this.init = function(){
-			this.deck = []; //empty the array
+			this.deck = []; 
 			for(var i = 0; i < cards.length; i+=1){
 		    	this.deck.push(new Card(cards[i],scores[i]));
 		    }
