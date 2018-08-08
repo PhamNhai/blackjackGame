@@ -1,7 +1,12 @@
 
 var BlackjackJS = (function() {
-	var	cards = ["c01.png","c02.png","c03.png","c04.png","c05.png","c06.png","c07.png","c08.png","c09.png","c10.png","c11.png","c12.png","c13.png","d01.png","d02.png","d03.png","d04.png","d05.png","d06.png","d07.png","d08.png","d09.png","d10.png","d11.png","d12.png","d13.png","h01.png","h02.png","h03.png","h04.png","h05.png","h06.png","h07.png","h08.png","h09.png","h10.png","h11.png","h12.png","h13.png","s01.png","s02.png","s03.png","s04.png","s05.png","s06.png","s07.png","s08.png","s09.png","s10.png","s11.png","s12.png","s13.png"];
+	var	cards = ["c01","c02","c03","c04","c05","c06","c07","c08","c09","c10","c11","c12","c13","d01","d02","d03","d04","d05","d06","d07","d08","d09","d10","d11","d12","d13","h01","h02","h03","h04","h05","h06","h07","h08","h09","h10","h11","h12","h13","s01","s02","s03","s04","s05","s06","s07","s08","s09","s10","s11","s12","s13"];
     var scores = [1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10];
+    var playerCards = document.getElementById('player');
+    var dealerCards = document.getElementById('dealer');
+	var playerNumCards = 2;
+	var dealerNumCards = 2;
+
 
 	function Card(card, score){
 		this.card = card;
@@ -10,17 +15,14 @@ var BlackjackJS = (function() {
 
 
 	Card.prototype.view = function(){
-		var src = '';
-		this.src =  "png/" + this.card;
-		// var image = document.createElement("img");
-		// var imageParent = document.getElementById("images");
-		// 	image.src = this.src;
-  //           alert(image.src);
-		// 	imageParent.appendChild(image);
-		return `
-			<div class="card ` + this.suit + `">
-			</div>
-		`;
+		var imgNode = "";
+		var cardUrl = "";
+		cardUrl = "png/"+this.card+".png";
+		imgNode = document.createElement('img');
+		imgNode.src=cardUrl;		
+		imgNode.style.height = '180px';
+        imgNode.style.width = '120px';
+        return imgNode;
 	}
 
 
@@ -45,14 +47,20 @@ var BlackjackJS = (function() {
 	}
 
 
-	Player.prototype.showHand = function(){
-		var hand = "";
-		for(var i = 0; i < this.hand.length; i++){
-			 hand += this.hand[i].view();
-		}
-		return hand;
-	}
 
+	Player.prototype.dealershowHand = function(){
+			for(var i = 0; i < this.hand.length; i++){
+				 var imgCard = this.hand[i].view();
+				dealerCards.appendChild(imgCard);
+			}
+		}
+
+	Player.prototype.playershowHand = function(){
+			for(var i = 0; i < this.hand.length; i++){
+				var imgCard = this.hand[i].view();
+				playerCards.appendChild(imgCard);
+			}
+		}
 
 	var Deck = new function(){
 	    this.deck;
@@ -89,8 +97,9 @@ var BlackjackJS = (function() {
 		this.hitButtonHandler = function(){
 			var card = Deck.deck.pop();
 			this.player.hit(card);
-
-			document.getElementById(this.player.element).innerHTML += card.view();
+			var imgCard = card.view();
+			playerNumCards ++;
+			playerCards.appendChild(imgCard);
 			this.playerScore.innerHTML = this.player.getScore();
 
 			if(this.player.getScore() > 21){
@@ -105,9 +114,11 @@ var BlackjackJS = (function() {
 
 			while(true){
 				var card = Deck.deck.pop();
-
+				dealerNumCards ++;
 				this.dealer.hit(card);
-				document.getElementById(this.dealer.element).innerHTML += card.view();
+				var imgCard = card.view();
+				dealerCards.appendChild(imgCard);
+				card.view();
 				this.dealerScore.innerHTML = this.dealer.getScore();
 
 				var playerBlackjack = this.player.getScore() == 21,
@@ -152,10 +163,18 @@ var BlackjackJS = (function() {
 			this.dealer = new Player('dealer', [Deck.deck.pop(), Deck.deck.pop()]);
 
 			this.player = new Player('player', [Deck.deck.pop(), Deck.deck.pop()]);
-
-			document.getElementById(this.dealer.element).innerHTML = this.dealer.showHand();
-			document.getElementById(this.player.element).innerHTML = this.player.showHand();
-
+			// (function removeImages() {
+			//     var list1 = document.getElementById("player");  
+			//      var lis2 = document.getElementById("dealer");   
+			//     for (var i = playerNumCards; i > 0; i--) {
+			// 		  list1.removeChild(list1.childNodes[0]);
+			//     }
+			//     for (var j = dealerNumCards; j > 0; j--) {
+			// 		list2.removeChild(list2.childNodes[0]);
+			//     }
+			//   }())
+			this.dealer.dealershowHand();
+			this.player.playershowHand();
 			this.dealerScore.innerHTML = this.dealer.getScore();
 			this.playerScore.innerHTML = this.player.getScore();
 
