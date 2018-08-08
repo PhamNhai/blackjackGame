@@ -8,6 +8,7 @@ var BlackjackJS = (function() {
 	var dealerNumCards = 2;
 
 
+
 	function Card(card, score){
 		this.card = card;
 	    this.score = score;
@@ -19,10 +20,19 @@ var BlackjackJS = (function() {
 		var cardUrl = "";
 		cardUrl = "png/"+this.card+".png";
 		imgNode = document.createElement('img');
+<<<<<<< HEAD
 		imgNode.src=cardUrl;		
 		imgNode.style.height = '180px';
         imgNode.style.width = '120px';
         return imgNode;
+=======
+		imgNode.src=cardUrl;
+	alert(imgNode.src);
+		
+		imgNode.style.height = '180px'
+        imgNode.style.width = '120px'
+		document.body.appendChild(imgNode);
+>>>>>>> ed6054d172de66426697cf20df6bec2ab4f43184
 	}
 
 
