@@ -164,16 +164,8 @@ var BlackjackJS = (function() {
 			this.dealer = new Player('dealer', [Deck.deck.pop(), Deck.deck.pop()]);
 
 			this.player = new Player('player', [Deck.deck.pop(), Deck.deck.pop()]);
-			// (function removeImages() {
-			//     var list1 = document.getElementById("player");  
-			//      var lis2 = document.getElementById("dealer");   
-			//     for (var i = playerNumCards; i > 0; i--) {
-			// 		  list1.removeChild(list1.childNodes[0]);
-			//     }
-			//     for (var j = dealerNumCards; j > 0; j--) {
-			// 		list2.removeChild(list2.childNodes[0]);
-			//     }
-			//   }())
+			document.getElementById("player").innerHTML = "";
+			document.getElementById("dealer").innerHTML = "";
 			this.dealer.dealershowHand();
 			this.player.playershowHand();
 			this.dealerScore.innerHTML = this.dealer.getScore();
