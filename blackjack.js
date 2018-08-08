@@ -1,7 +1,8 @@
 
 var BlackjackJS = (function() {
-	var	cards = ["c01.png","c02.png","c03.png","c04.png","c05.png","c06.png","c07.png","c08.png","c09.png","c10.png","c11.png","c12.png","c13.png","d01.png","d02.png","d03.png","d04.png","d05.png","d06.png","d07.png","d08.png","d09.png","d10.png","d11.png","d12.png","d13.png","h01.png","h02.png","h03.png","h04.png","h05.png","h06.png","h07.png","h08.png","h09.png","h10.png","h11.png","h12.png","h13.png","s01.png","s02.png","s03.png","s04.png","s05.png","s06.png","s07.png","s08.png","s09.png","s10.png","s11.png","s12.png","s13.png"];
+	var	cards = ["c01","c02","c03","c04","c05","c06","c07","c08","c09","c10","c11","c12","c13","d01","d02","d03","d04","d05","d06","d07","d08","d09","d10","d11","d12","d13","h01","h02","h03","h04","h05","h06","h07","h08","h09","h10","h11","h12","h13","s01","s02","s03","s04","s05","s06","s07","s08","s09","s10","s11","s12","s13"];
     var scores = [1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10];
+
 
 	function Card(card, score){
 		this.card = card;
@@ -10,17 +11,16 @@ var BlackjackJS = (function() {
 
 
 	Card.prototype.view = function(){
-		var src = '';
-		this.src =  "png/" + this.card;
-		// var image = document.createElement("img");
-		// var imageParent = document.getElementById("images");
-		// 	image.src = this.src;
-  //           alert(image.src);
-		// 	imageParent.appendChild(image);
-		return `
-			<div class="card ` + this.suit + `">
-			</div>
-		`;
+		var imgNode = "";
+		var cardUrl = "";
+		cardUrl = "png/"+this.card+".png";
+		imgNode = document.createElement('img');
+		imgNode.src=cardUrl;
+	alert(imgNode.src);
+		
+		imgNode.style.height = '180px'
+        imgNode.style.width = '120px'
+		document.body.appendChild(imgNode);
 	}
 
 
